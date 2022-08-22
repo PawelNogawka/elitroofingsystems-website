@@ -1,0 +1,982 @@
+@import "./components";
+@import "./colors";
+@import "./mixins";
+@import "./animations";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding: 7rem;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem;
+  z-index: 100;
+  transition: all 0.6s;
+
+  &__logo {
+    font-size: 1.9rem;
+    font-weight: 500;
+    color: $white;
+    text-decoration: none;
+    transition: color 0.6s;
+
+    span {
+      color: $main;
+    }
+  }
+
+  .change &__logo {
+    color: $text;
+  }
+
+  &.change {
+    background-color: $white;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    box-shadow: $box-shadow;
+  }
+}
+
+.nav {
+  &__hamburger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 4rem;
+    height: 3rem;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  &__line {
+    width: 100%;
+    height: 0.3rem;
+    background-color: $white;
+    transition: all 0.6s;
+  }
+
+  .active &__line--1 {
+    transform: rotateZ(-405deg) translate(-8px, 6px);
+  }
+  .active &__line--3 {
+    transform: rotateZ(405deg) translate(-8px, -6px);
+  }
+
+  .active &__line--2 {
+    opacity: 0;
+  }
+
+  .change &__line,
+  .active &__line {
+    background-color: $main;
+  }
+
+  &--desktop {
+    display: none;
+  }
+
+  &__link {
+    text-transform: capitalize;
+    text-decoration: none;
+    padding: 0.6rem;
+  }
+
+  &__link--mobile {
+    font-size: 2.2rem;
+    color: $text;
+  }
+
+  &__list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    width: 100%;
+    height: 100%;
+    background-color: $white;
+    transform: translateY(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .active &__list {
+    transform: translateY(0);
+  }
+}
+
+.home {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 1rem;
+  color: $white;
+  background-color: #000;
+
+  &__banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 50rem;
+    text-align: center;
+    z-index: 20;
+  }
+  &__heading {
+    font-size: 4rem;
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+
+  &__info {
+    font-size: 1.6rem;
+    font-weight: 300;
+    text-transform: capitalize;
+  }
+
+  &__btn-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  &__btn {
+    padding: 1rem 3rem;
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: $white;
+    text-transform: capitalize;
+    transition: background-color 0.5s, border-color 0.5s;
+    &:hover {
+      background-color: $hover;
+      border-color: $hover;
+    }
+
+    &--about {
+      background-color: $main;
+      border: 0.2rem solid $main;
+    }
+    &--contact {
+      background: none;
+      border: 0.2rem solid $white;
+    }
+  }
+  &__arrow-box {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+  }
+
+  &__arrow {
+    margin-right: 0.3rem;
+    color: $white;
+    font-size: 3rem;
+    cursor: pointer;
+    text-shadow: 0 -2rem 0 $white, 0 -4rem 0 $white;
+    transform: translateY(-4rem);
+    animation: arrow 2s linear infinite;
+  }
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+
+  &__slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #121212;
+    transition:  1s ease;
+  }
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+
+  }
+
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    right: 5%;
+    display: flex;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    background-color: $white;
+  }
+
+  &__arrow {
+    margin-top: 1.4rem;
+    height: 100%;
+  }
+
+  &__line {
+    width: 0.2rem;
+    height: 35%;
+    background-color: $text;
+
+    &--1 {
+      transform: rotate(30deg) translateY(0.15rem);
+    }
+    &--2 {
+      transform: rotate(-30deg) translateY(-0.15rem);
+    }
+    &--3 {
+      transform: rotate(-30deg) translateY(0.15rem);
+    }
+    &--4 {
+      transform: rotate(30deg) translateY(-0.15rem);
+    }
+  }
+}
+
+.about {
+  color: $text;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__img-box {
+    flex: 1 1 50rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+    box-shadow: $box-shadow-light;
+  }
+
+  &__content-box {
+    flex: 1 1 50rem;
+    padding: 2rem;
+    background-color: $secondary;
+    box-shadow: $box-shadow-light;
+  }
+
+  &__heading {
+    font-weight: 400;
+    font-size: 2.2rem;
+    line-height: 150%;
+  }
+
+  &__info {
+    margin: 3rem 0;
+    font-weight: 300;
+    font-size: 1.6rem;
+    line-height: 150%;
+  }
+
+  &__btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background-color: $main;
+    color: $white;
+    text-decoration: none;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    transition: background-color 0.6s ease;
+
+    &:hover {
+      background-color: $hover;
+    }
+  }
+
+  &__counter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  &__box {
+    flex: 1 1 23rem;
+    padding: 2rem;
+    box-shadow: $box-shadow-light;
+    background-color: $secondary;
+    text-align: center;
+  }
+
+  &__ammount {
+    margin-bottom: 3rem;
+    font-weight: 400;
+    font-size: 3rem;
+  }
+
+  &__name {
+    font-weight: 300;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+  }
+}
+
+.services {
+  background-color: $secondary;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+  }
+
+  &__service {
+    flex: 1 1 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem;
+    background-color: $white;
+    box-shadow: $box-shadow;
+  }
+
+  &__icon {
+    width: 9rem;
+  }
+
+  &__name {
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 2.4rem;
+  }
+
+  &__info {
+    font-size: 1.6rem;
+    line-height: 150%;
+    text-align: center;
+  }
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
+  min-height: 70vh;
+  background-image: $linear-gradient, url("../images/pokrycie-dachowe.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: $white;
+  text-transform: capitalize;
+  text-align: center;
+
+  &__heading {
+    font-size: 3rem;
+    font-weight: 500;
+  }
+  span {
+    color: $main;
+  }
+  &__line {
+    height: 0.3rem;
+    width: 40%;
+    min-width: 30rem;
+    background-color: $white;
+  }
+
+  &__info {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+}
+
+.gallery {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+
+  &__img-box {
+    position: relative;
+    flex: 1 1 35rem;
+    height: 25rem;
+    box-shadow: $box-shadow-light;
+
+    &:hover::before{
+      transform: scaleY(1);
+    }
+
+    &:hover .gallery__icon{
+      visibility: visible;
+      opacity:1;
+    }
+
+    &::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      transform: scaleY(0);
+      background-color: #000;
+      opacity:0.8;
+      transition: transform .5s ;
+      transform-origin: bottom;
+    }
+  }
+
+  &__icon{
+     position: absolute;
+     top: 50%;
+     transform:translateY(-50%);
+     left: calc(50% - 3.5rem);
+     width: 7rem;
+     visibility: hidden;
+     opacity:0;
+     cursor: pointer;
+     transition: all .5s;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__popup{
+    display: none;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background:$linear-gradient-dark;
+    z-index: 20000;
+  }
+
+  &__popup-img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 80rem;
+    height: auto;
+   object-fit: cover;
+   padding: 2rem;
+  }
+
+  &__close{
+    font-size:3rem;
+    position:absolute;
+    right: 2rem;
+    top: 2rem;
+    padding: 2rem;
+    cursor: pointer;
+    color:$white;
+  }
+}
+
+.whywe {
+  padding: 6rem 0 0 0;
+  background-color: $secondary;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 0 2rem;
+  }
+
+  &__box {
+    flex: 1 1 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2rem;
+    background-color: $white;
+    box-shadow: $box-shadow;
+  }
+  &__icon {
+    width: 10rem;
+  }
+  &__name {
+    font-weight: 400;
+    font-size: 2.4rem;
+    text-transform: capitalize;
+  }
+
+  &__info {
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 150%;
+    text-align: center;
+  }
+
+  &__bgc {
+    padding: 6rem 2rem;
+    min-height: 70vh;
+    margin-top: 4rem;
+    background-image: $linear-gradient,
+      url("../images/okrycie-dachowe-duzy.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__features-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 130rem;
+    margin: 0 auto;
+  }
+
+  &__feature {
+    flex: 1 1 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+    border: 0.2rem solid $white;
+  }
+
+  &__feature-name {
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: $white;
+    text-transform: capitalize;
+  }
+
+  &__red-bgc {
+    background-color: $main;
+  }
+
+  &__container2 {
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    max-width: 130rem;
+    margin: 0 auto;
+  }
+
+  &__img-box {
+    flex: 1 1 50rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: $box-shadow;
+  }
+  &__content {
+    flex: 1 1 50rem;
+    color: $white;
+  }
+
+  &__content-heading {
+    margin-bottom: 4rem;
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  &__check-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    i {
+      font-size: 3rem;
+    }
+  }
+
+  &__check-info {
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+}
+
+.contact {
+  &__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  &__form {
+    flex: 1 1 50rem;
+    gap: 3rem;
+  }
+
+  &__card-box {
+    flex: 1 1 50rem;
+    perspective: 100rem;
+  }
+
+  &__card-box:hover .card {
+    transform: rotateY(180deg);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+  }
+
+  &__input,
+  &__txtarea {
+    padding: 1rem;
+    border: none;
+    outline: none;
+    background-color: $secondary;
+  }
+
+  &__txtarea {
+    max-height: 20rem;
+  }
+
+  &__btn {
+    width: 20rem;
+    font-size: 1.6rem;
+    color: $white;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 1rem;
+    background-color: $main;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.6s ease;
+    &:hover {
+      background-color: $hover;
+    }
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: $white;
+  transform-style: preserve-3d;
+  transition: all 1s;
+  box-shadow: $box-shadow;
+
+  &__front {
+    backface-visibility: hidden;
+    padding: 2rem 0;
+    display: flex;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255) 40%,
+      rgb(38, 38, 38) 0
+    );
+  }
+
+  &__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+  }
+
+  &__back-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+  }
+  &__logo {
+     text-transform: uppercase;
+     color:$text;
+     font-size:3rem;
+     font-weight: 500;
+  }
+
+  &__right {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__person {
+    padding: 1rem;
+    background-color: $main;
+  }
+
+  &__name {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+
+  &__person-info {
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    font-weight: 300;
+    text-align: right;
+  }
+
+  &__method {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 0.7rem;
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background-color: $main;
+      width: 3rem;
+      height: 3rem;
+      font-size: 1.8rem;
+    }
+    p {
+      word-break: break-all;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.footer {
+  &__media {
+    padding: 3rem 2rem;
+    background-color: $main;
+    text-align: center;
+
+    i {
+      font-size: 3rem;
+      color: $white;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 3rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+    color: $white;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 3rem 2rem;
+    background-color: $beside;
+  }
+  &__link {
+    padding: 0.5rem;
+    color: $white;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .header {
+    padding: 4rem;
+    &__logo {
+      font-size: 2.3rem;
+    }
+  }
+  .home {
+    &__banner {
+      gap: 3rem;
+    }
+    &__btn-box {
+      flex-direction: row;
+      gap: 3rem;
+    }
+
+    &__heading {
+      font-size: 4.8rem;
+    }
+  }
+  .company {
+    &__heading {
+      font-size: 5rem;
+    }
+  }
+  .card {
+    &__person {
+      padding: 1rem 3rem 1rem 4rem;
+    }
+
+    &__name {
+      font-size: 1.8rem;
+    }
+
+    &__method {
+      gap: 1.5rem;
+      i {
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1.6rem;
+      }
+    }
+
+    &__method--1 {
+      margin-left: 1rem;
+    }
+    &__method--2 {
+      margin-left: 2rem;
+    }
+    &__method--3 {
+      margin-left: 3rem;
+    }
+  }
+
+  .footer {
+    &__heading {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .nav {
+    &--desktop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    &__link {
+      &--desktop {
+        font-size: 1.6rem;
+        text-transform: capitalize;
+        color: $white;
+        transition: color 0.6s;
+
+        &:last-child {
+          margin-left: 2rem;
+          background-color: $main;
+          padding: 1rem 3rem;
+          transition: background-color 0.6s ease;
+
+          &:hover {
+            background-color: $hover;
+          }
+        }
+      }
+
+      .change &--desktop {
+        color: $text;
+      }
+
+      .change &--desktop:last-child {
+        color: $white;
+      }
+
+      &:hover {
+        color: $main;
+      }
+      &:last-child:hover {
+        color: $white;
+      }
+    }
+    &__hamburger {
+      display: none;
+    }
+  }
+
+  .about {
+    &__counter {
+      gap: 4rem;
+    }
+
+    &__content-box {
+      padding: 2rem 2rem 2rem 4rem;
+    }
+  }
+}

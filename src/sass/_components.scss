@@ -1,0 +1,27 @@
+.section-padding {
+  padding: 4rem 2rem 3rem 2rem;
+}
+
+.section-heading {
+  margin-bottom: 4.5rem;
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 2rem 4rem 2rem;
+  }
+  .section-heading {
+    margin-bottom: 6.5rem;
+    font-size: 3.5rem;
+  }
+}

@@ -1,0 +1,28 @@
+//colors
+
+$main: #c11316;
+$secondary: #e0e0e0;
+$beside:#262626;
+$hover:#800000;
+$text: #1c1d1f;
+$white: #ffffff;
+
+//box-shadows
+
+$box-shadow: 0 0.3rem 1.5rem rgba(0, 0, 0, 0.2);
+$box-shadow-light: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+//gradients
+
+$linear-gradient: linear-gradient(
+  to right,
+  rgba(18, 18, 18, 0.6),
+  rgba(18, 18, 18, 0.6)
+);
+
+
+$linear-gradient-dark: linear-gradient(
+  to right,
+  rgba(18, 18, 18, 0.85),
+  rgba(18, 18, 18, 0.85)
+);
